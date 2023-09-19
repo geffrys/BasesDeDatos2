@@ -1,0 +1,145 @@
+db.clientes.insert({
+    ID: 1001,
+    JobTitle: "Insurance Broker",
+    EmailAddress: "mariap@gmail.com",
+    FirstName: "Maria",
+    LastName: "Perez",
+    Edad: 22,
+    Puntaje: 3,
+    Region: "Orinoquia",
+    Sabores: ["Kiwi", "Fresa"]
+},
+    {
+        ID: 1002,
+        JobTitle: "Fabricator",
+        EmailAddress: "fabica@hotmail.com",
+        FirstName: "Fabio",
+        LastName: "Castro",
+        Edad: 33,
+        Puntaje: 4,
+        Region: "Andina",
+        Sabores: ["Lulo", "Limon"]
+    },
+    {
+        ID: 1003,
+        JobTitle: "Physical",
+        EmailAddress: "pedroar@gmail.com",
+        FirstName: "Pedro",
+        LastName: "Arango",
+        Edad: 50,
+        Puntaje: 5,
+        Region: "Pacífica",
+        Sabores: ["Cacao", "Mora", "Lulo"]
+    },
+    {
+        ID: 1004,
+        JobTitle: "physical1",
+        EmailAddress: "carlosp@gmail.com",
+        FirstName: "Carlos",
+        LastName: "Pinto",
+        Edad: 37,
+        Puntaje: 2,
+        Region: "Orinoquia",
+        Sabores: ["Lulo", "Fresa"]
+    },
+    {
+        ID: 1005,
+        JobTitle: "Fabricator1",
+        EmailAddress: "nubiac@gmail.com",
+        FirstName: "Nubia",
+        LastName: "Cano",
+        Edad: 28,
+        Puntaje: 5,
+        Region: "Pacífica",
+    }
+)
+
+// TRADUCCION A MONGO DB VERSION 7.0
+
+db.clientes.insertMany([{
+    ID: 1001,
+    JobTitle: "Insurance Broker",
+    EmailAddress: "mariap@gmail.com",
+    FirstName: "Maria",
+    LastName: "Perez",
+    Edad: 22,
+    Puntaje: 3,
+    Region: "Orinoquia",
+    Sabores: ["Kiwi", "Fresa"]
+},
+{
+    ID: 1002,
+    JobTitle: "Fabricator",
+    EmailAddress: "fabica@hotmail.com",
+    FirstName: "Fabio",
+    LastName: "Castro",
+    Edad: 33,
+    Puntaje: 4,
+    Region: "Andina",
+    Sabores: ["Lulo", "Limon"]
+},
+{
+    ID: 1003,
+    JobTitle: "Physical",
+    EmailAddress: "pedroar@gmail.com",
+    FirstName: "Pedro",
+    LastName: "Arango",
+    Edad: 50,
+    Puntaje: 5,
+    Region: "Pacífica",
+    Sabores: ["Cacao", "Mora", "Lulo"]
+},
+{
+    ID: 1004,
+    JobTitle: "physical1",
+    EmailAddress: "carlosp@gmail.com",
+    FirstName: "Carlos",
+    LastName: "Pinto",
+    Edad: 37,
+    Puntaje: 2,
+    Region: "Orinoquia",
+    Sabores: ["Lulo", "Fresa"]
+},
+{
+    ID: 1005,
+    JobTitle: "Fabricator1",
+    EmailAddress: "nubiac@gmail.com",
+    FirstName: "Nubia",
+    LastName: "Cano",
+    Edad: 28,
+    Puntaje: 5,
+    Region: "Pacífica",
+    Sabores: ["Cacao", "Mora"]
+}]
+)
+
+//Los clientes mayores de 30 años
+
+db.clientes.find({ Edad: { $gte: 30 } })
+
+// los clientes menores de 40 años
+
+db.clientes.find({ Edad: { $lte: 40 } })
+
+// cantidad de documentos que hay en la coleccion clientes
+
+db.clientes.count()
+// TRADUCCION A MONGO DB VERSION 7.0
+db.clientes.countDocuments()
+
+// agregar al id 1005 el sabor limon
+db.clientes.update({ ID: 1005 }, { $push: { Sabores: "Limon" } })
+db.clientes.find({ ID: 1005 })
+
+// titulos de los clientes ubicados en orinoquia
+db.clientes.find({ Region: "Orinoquia"}, {JobTitle: 1, _id: 0}) /* En el primer { filtros }, { campos a mostrar } */
+
+// eliminar el documento con id 1004
+db.clientes.remove({ ID: 1004 })
+// TRADUCCION A MONGO DB VERSION 7.0
+db.clientes.deleteOne({ ID: 1004 })
+
+// eliminar todos los documentos de la coleccion clientes
+db.clientes.remove({})
+// TRADUCCION A MONGO DB VERSION 7.0
+db.clientes.deleteMany({})

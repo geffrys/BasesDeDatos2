@@ -1,0 +1,21 @@
+# version del archivo yml que vamos a usar
+version: '3.9'
+
+# donde corremos nuestros servicios y le damos las instrucciones
+services:
+# nombre de nuestro contenedor, el nombre que usaremos para hacer el up o el build
+  mongodb_:
+    image: mongo
+    ports:
+# <local>:<el del servicio>, 27018 porque al parecer localmente se esta usando
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+    volumes:
+# # guardamos el estado a traves de los volumenes, pues los contenedores no guardan estados
+# # cualquier cosa que pase en la carpeta data/db se copiara a la carpeta local que le definamos en este caso mongo_data
+      - ./mongo_data:/data/db
+volumes:
+  mongo_data:
+    external: true
