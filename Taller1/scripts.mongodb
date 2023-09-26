@@ -115,11 +115,11 @@ db.clientes.insertMany([{
 
 //Los clientes mayores de 30 años
 
-db.clientes.find({ Edad: { $gte: 30 } })
+db.clientes.find({ Edad: { $gt: 30 } })
 
 // los clientes menores de 40 años
 
-db.clientes.find({ Edad: { $lte: 40 } })
+db.clientes.find({ Edad: { $lt: 40 } })
 
 // cantidad de documentos que hay en la coleccion clientes
 
